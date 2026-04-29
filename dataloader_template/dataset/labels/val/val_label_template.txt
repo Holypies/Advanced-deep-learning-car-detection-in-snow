@@ -1,0 +1,2 @@
+#class x y width height
+0 x y w h
