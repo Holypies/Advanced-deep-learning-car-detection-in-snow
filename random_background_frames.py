@@ -23,12 +23,11 @@ def extract_random_frames(video, frame_amount, image_path, label_path):
         randomFrameNumber=random.randint(0, int(totalFrames))
         
         # path to object frames
-        path = f"{image_path}/{vidName}_frame{randomFrameNumber}"
+        path = f"{image_path}{vidName}_frame_{randomFrameNumber}.jpg"
 
         # check if frame exists already
         if not os.path.exists(path):
          #   continue
-        #else:
             # set frame position
             vidcap.set(cv2.CAP_PROP_POS_FRAMES,randomFrameNumber)
 
@@ -39,10 +38,12 @@ def extract_random_frames(video, frame_amount, image_path, label_path):
 
             if success:
                 
-                cv2.imwrite(f"{image_path}/{vidName}_frame{randomFrameNumber}.jpg", image)
-                open(f'{label_path}/{vidName}_frame_{randomFrameNumber}.txt', 'w').close()
+                cv2.imwrite(f"{image_path}{vidName}_frame_{randomFrameNumber}.jpg", image)
+                open(f'{label_path}{vidName}_frame_{randomFrameNumber}.txt', 'w').close()
             else: 
                 raise Exception(f"Something went wrong with frame{randomFrameNumber}")
+        else:
+            print("Douplicate found: trying again")
 
 
 
